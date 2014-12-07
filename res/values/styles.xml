@@ -1,0 +1,68 @@
+<resources>
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+
+    <style name="tv_home_title">
+        <item name="android:layout_width">80dip</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="tv_foundbuddha_title">
+        <item name="android:layout_width">0dip</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">#6c6c6c</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="tv_recommend_title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">26.67dip</item>
+        <item name="android:background">#f6f6f6</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#5c5c5c</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">13.33dip</item>
+    </style>
+
+    <style name="tv_login_menu">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">58dip</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#333333</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawablePadding">20dip</item>
+    </style>
+
+    <style name="line_login_menu">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dip</item>
+        <item name="android:layout_marginLeft">15dip</item>
+        <item name="android:layout_marginRight">15dip</item>
+        <item name="android:background">#d3d5dc</item>
+    </style>
+
+    <style name="line_login">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dip</item>
+        <item name="android:background">#d3d5dc</item>
+    </style>
+
+</resources>

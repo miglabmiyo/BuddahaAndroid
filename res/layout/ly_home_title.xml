@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="45dip" 
+    android:background="#528B8B" >
+
+    <TextView
+        android:id="@+id/tv_findfo"
+        style="@style/tv_home_title"
+        android:background="#545454"
+        android:text="@string/found_buddha" />
+
+    <TextView
+        android:id="@+id/tv_myfo"
+        style="@style/tv_home_title"
+        android:layout_toRightOf="@+id/tv_findfo"
+        android:text="@string/my_buddha" />
+
+    <TextView
+        android:id="@+id/tv_myinfo"
+        style="@style/tv_home_title"
+        android:layout_toRightOf="@+id/tv_myfo"
+        android:text="@string/myinfo"/>
+
+    <ImageView
+        android:id="@+id/iv_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/ic_msg_home" />
+
+    <ImageView
+        android:id="@+id/iv_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@+id/iv_msg"
+        android:src="@drawable/ic_search_home" />
+
+</RelativeLayout>

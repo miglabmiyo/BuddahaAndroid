@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:background="#ffffffff"
+        android:orientation="vertical" >
+
+        <!-- 横幅区域 -->
+
+        <include
+            android:id="@+id/ly_ad"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            layout="@layout/ly_banner" />
+
+		<!-->ImageView 
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/banner"/ -->
+
+        <include
+            android:id="@+id/ly_news" layout="@layout/ly_recommend_news" />
+
+        <include layout="@layout/ly_recommend_books" />
+
+        <include layout="@layout/ly_recommend_activitys" />
+    </LinearLayout>
+
+</ScrollView>

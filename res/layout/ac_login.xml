@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fbfbfb"
+    android:orientation="vertical" >
+
+    <include layout="@layout/ly_title_single" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dip"
+        android:src="@drawable/login_logo" />
+
+    <View style="@style/line_login" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="176dip"
+        android:background="#ffffff">
+
+        <TextView
+            android:id="@+id/sina"
+            style="@style/tv_login_menu"
+            android:drawableLeft="@drawable/weibo_ico"
+            android:text="@string/login_sina" 
+            android:layout_centerInParent="true"
+            />
+        
+        <View android:id="@+id/line2"
+            android:layout_above="@+id/sina"
+            style="@style/line_login_menu" />
+        
+        <TextView
+            android:id="@+id/qq"
+            style="@style/tv_login_menu"
+            android:drawableLeft="@drawable/qq_ico"
+            android:text="@string/login_qq" 
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/line2"
+            android:layout_alignLeft="@+id/sina"
+            />
+
+        <View  android:id="@+id/line3"
+            android:layout_below="@+id/sina"
+            style="@style/line_login_menu" />
+        
+        <TextView
+            android:id="@+id/weixin"
+            style="@style/tv_login_menu"
+            android:drawableLeft="@drawable/weixin_ico"
+            android:text="@string/login_wx" 
+            android:layout_below="@+id/line3"
+            android:layout_alignLeft="@+id/sina"/>
+    </RelativeLayout>
+
+    <View style="@style/line_login" />
+
+    <TextView
+        android:id="@+id/guestlogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:padding="15dip"
+        android:text="@string/login_guest" />
+
+</LinearLayout>

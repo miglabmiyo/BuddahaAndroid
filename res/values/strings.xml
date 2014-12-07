@@ -1,0 +1,24 @@
+<resources>
+
+    <string name="app_name">佛陀道場</string>
+    <string name="found_buddha">发现佛缘</string>
+    <string name="my_buddha">我的佛缘</string>
+    <string name="myinfo">个人中心</string>
+    <string name="recommend">推荐</string>
+    <string name="introduce">介绍</string>
+    <string name="bookmall">书库</string>
+    <string name="map">地图</string>
+    <string name="activity">活动</string>
+    <string name="first_news_title">头条新闻</string>
+    <string name="buddha_book">佛教书籍</string>
+    <string name="buddha_activity">佛教活动</string>
+    <string name="exit_tips">再按一次退出应用</string>
+    <string name="login">登录</string>
+    <string name="login_guest">先看看</string>
+    <string name="login_qq">QQ登录</string>
+    <string name="login_sina">新浪微博登录</string>
+    <string name="login_wx">微信登录</string>
+    <string name="login_success">登录成功</string>
+    <string name="login_fail">登录失败</string>
+
+</resources>
