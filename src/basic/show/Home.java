@@ -36,7 +36,7 @@ public class Home extends BaseFragmentActivity {
 	}
 
 	void init() {
-		setView();
+		setView();		
 	}
 
 	void setView() {

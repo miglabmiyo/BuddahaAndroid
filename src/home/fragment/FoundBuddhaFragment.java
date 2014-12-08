@@ -210,4 +210,5 @@ public class FoundBuddhaFragment extends BaseFragment {
 			}
 		}
 	}
+
 }

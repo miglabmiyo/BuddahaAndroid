@@ -1,5 +1,6 @@
 package home.fragment;
 
+import home.task.RecommendBuddhaTask;
 import home.view.SecondViewPager;
 
 import java.io.File;
@@ -29,6 +30,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import basic.io.ImageUtil;
+import basic.net.ApiDefine;
 import basic.show.BaseFragment;
 import basic.util.AppStatus;
 import basic.util.MyLog;
@@ -43,6 +45,7 @@ import com.miglab.buddha.R;
 public class RecommendFragment extends BaseFragment {
 	View vRoot;
 	Activity ac;
+	RecommendView[] views = new RecommendView[4];
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,11 +57,21 @@ public class RecommendFragment extends BaseFragment {
 	}
 
 	void init() {
-		new RecommendBanner();
-		new RecommendNews();
+		new RecommendBuddhaTask(h).execute();
+
+		views[0] = new RecommendBanner();
+		views[1] = new RecommendNews();
+		views[2] = new RecommendBooks();
+		views[3] = new RecommendActivitys();
 	}
 
-	class RecommendBanner {
+	class RecommendView {
+		void onDataUpdated() {
+			MyLog.v(TAG, "onDataUpdated");
+		}
+	}
+
+	class RecommendBanner extends RecommendView {
 		SecondViewPager vp;
 		AdViewPagerAdapter vpAdapter;
 		ArrayList<AdvertBannerInfo> mlist = new ArrayList<AdvertBannerInfo>();
@@ -76,38 +89,38 @@ public class RecommendFragment extends BaseFragment {
 			dotsGridView = (GridView) vRoot.findViewById(R.id.main_dots);
 		}
 
+		AdViewPagerAdapterClickMethod method = new AdViewPagerAdapterClickMethod() {
+
+			@Override
+			public void click(ImageView img, int position) {
+				if (mlist == null || mlist.isEmpty())
+					return;
+
+				final AdvertBannerInfo info = mlist.get(position);
+				if (info == null)
+					return;
+
+				img.setOnClickListener(new View.OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						clickBanner(info);
+					}
+
+				});
+
+			}
+
+		};
+		
 		synchronized void freshViewPager() {
 			MyLog.v(TAG, "freshViewPager.");
-			getList();
-
-			AdViewPagerAdapterClickMethod method = new AdViewPagerAdapterClickMethod() {
-
-				@Override
-				public void click(ImageView img, int position) {
-					if (mlist == null || mlist.isEmpty())
-						return;
-
-					final AdvertBannerInfo info = mlist.get(position);
-					if (info == null)
-						return;
-
-					img.setOnClickListener(new View.OnClickListener() {
-
-						@Override
-						public void onClick(View v) {
-							// TODO Auto-generated method stub
-							clickBanner(info);
-						}
-
-					});
-
-				}
-
-			};
+			if (!checkList())
+				return;
 
 			vpAdapter = new AdViewPagerAdapter(ac, mlist, method);
 			vp.setAdapter(vpAdapter);
-
 			vp.setCurrentItem(0);
 
 			if (mlist.size() > 1) {
@@ -123,12 +136,13 @@ public class RecommendFragment extends BaseFragment {
 					images.add(info.imgUrl);
 				}
 			}
-
-			ImageUtil.showBannerImage(ac, handler, images, FRESH_BANNER_IMAGE,
-					false, 1);
+			
+			if (!images.isEmpty())
+				ImageUtil.showBannerImage(ac, handler, images,
+						FRESH_BANNER_IMAGE, false, 1);
 		}
 
-		void getList() {
+		boolean checkList() {
 			SharedPreferences sharedPrefs = AppStatus.frontActivity
 					.getSharedPreferences("home_content", Context.MODE_PRIVATE);
 
@@ -136,23 +150,55 @@ public class RecommendFragment extends BaseFragment {
 				String str = sharedPrefs.getString("advert", null);
 				if (!TextUtils.isEmpty(str)) {
 					try {
+						ArrayList<AdvertBannerInfo> list = new ArrayList<AdvertBannerInfo>();
 						JSONArray array = new JSONArray(str);
-						mlist.clear();
 						for (int i = 0; i < array.length(); i++) {
 							JSONObject obj = array.optJSONObject(i);
 							if (obj != null) {
 								AdvertBannerInfo info = new AdvertBannerInfo(
 										obj);
-								mlist.add(info);
+								list.add(info);
 							}
 						}
+
+						boolean isAllEqual = true;
+
+						if (!mlist.isEmpty() && mlist.size() == list.size()) {
+							for (int i = 0; i < mlist.size(); i++) {
+								AdvertBannerInfo info1 = mlist.get(i);
+								AdvertBannerInfo info2 = list.get(i);
+								if (info1 == null || info2 == null
+										|| !info1.compareInfo(info2)) {
+									isAllEqual = false;
+									break;
+								}
+							}
+						} else {
+							isAllEqual = false;
+						}
+
+						if (!isAllEqual) {
+							mlist.clear();
+							mlist.addAll(list);
+						}
+
+						return !isAllEqual;
+
 					} catch (JSONException e) {
 						// TODO 自动生成的 catch 块
 						e.printStackTrace();
 					}
-
+				}
+			} else {
+				if (mlist.isEmpty()) { // 默认数据
+					AdvertBannerInfo info = new AdvertBannerInfo(
+							R.drawable.banner);
+					mlist.add(info);
+					return true;
 				}
 			}
+
+			return false;
 		}
 
 		void clickBanner(AdvertBannerInfo info) {
@@ -206,6 +252,15 @@ public class RecommendFragment extends BaseFragment {
 
 			public AdvertBannerInfo(int resource) {
 				imgResource = resource;
+			}
+
+			public boolean compareInfo(AdvertBannerInfo info) {
+				if (info != null && this.title.equals(info.title)
+						&& this.imgUrl.equals(info.imgUrl)
+						&& this.weight == info.weight)
+					return true;
+
+				return false;
 			}
 		}
 
@@ -447,13 +502,19 @@ public class RecommendFragment extends BaseFragment {
 			}
 		}
 
+		@Override
+		void onDataUpdated() {
+			super.onDataUpdated();
+			freshViewPager();
+		}
+
 	}
 
 	interface AdViewPagerAdapterClickMethod {
 		void click(ImageView img, int position);
 	}
 
-	class RecommendNews {
+	class RecommendNews extends RecommendView {
 		View ly_news;
 
 		public RecommendNews() {
@@ -488,11 +549,7 @@ public class RecommendFragment extends BaseFragment {
 						// TODO 自动生成的 catch 块
 						e.printStackTrace();
 					}
-
 				}
-
-				String str = sharedPrefs.getString("advert", null);
-				MyLog.v(TAG, "advert == " + str);
 			}
 
 		}
@@ -511,9 +568,15 @@ public class RecommendFragment extends BaseFragment {
 		void getImage() {
 
 		}
+
+		@Override
+		void onDataUpdated() {
+			super.onDataUpdated();
+			initData();
+		}
 	}
 
-	class RecommendBooks {
+	class RecommendBooks extends RecommendView {
 		ImageView[] iv_books = new ImageView[3];
 
 		public RecommendBooks() {
@@ -549,9 +612,44 @@ public class RecommendFragment extends BaseFragment {
 
 		}
 
+		@Override
+		void onDataUpdated() {
+			super.onDataUpdated();
+			initData();
+		}
 	}
 
-	class RecommendActivitys{
-		
+	class RecommendActivitys extends RecommendView {
+
+		@Override
+		void onDataUpdated() {
+			// TODO 自动生成的方法存根
+			super.onDataUpdated();
+		}
 	}
+
+	Handler h = new Handler() {
+
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO 自动生成的方法存根
+			super.handleMessage(msg);
+
+			try {
+				int nCommand = msg.what;
+				switch (nCommand) {
+				case ApiDefine.GET_SUCCESS:
+					MyLog.d(TAG, "GET_SUCCESS");
+					for (int i = 0; i < views.length; i++) {
+						views[i].onDataUpdated();
+					}
+					break;
+				default:
+					break;
+				}
+			} catch (Exception e) {
+				MyLog.showException(e);
+			}
+		}
+	};
 }

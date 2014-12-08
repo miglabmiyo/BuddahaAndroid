@@ -6,14 +6,16 @@ package basic.net;
  */
 public interface ApiDefine {
 
-	String DOMAIN = "http://112.124.49.59/cgi-bin/";
+	String DOMAIN = "http://112.124.49.59/cgi-bin/buddha";
 	
-	String QUICK_LOGIN = "buddha/user/1/quicklogin.fcgi";
-	String OTHER_LOGIN = "buddha/user/1/thirdlogin.fcgi";
-	String BAIDU_PUSH = "buddha/user/1/bdbindpush.fcgi";
+	String QUICK_LOGIN = "/user/1/quicklogin.fcgi";
+	String OTHER_LOGIN = "/user/1/thirdlogin.fcgi";
+	String BAIDU_PUSH = "/user/1/bdbindpush.fcgi";
+	String HOME_INFO = "/find/1/findrecom.fcgi";
 	
 
 	int LOGIN_SUCCESS = 100001;
+	int GET_SUCCESS = 100002;
 	
 	
 	int ERROR_TIMEOUT = 200000;
