@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/ly_title_single" />
+
+    <include layout="@layout/item_map_distance" />
+    
+    <View style="@style/line_map_detail" />
+    
+    <include android:id="@+id/ly_address"  layout="@layout/item_map_select" />
+    
+    <View style="@style/line_map_detail" />
+    
+    <include android:id="@+id/ly_phone"  layout="@layout/item_map_phone" />
+    
+    <View style="@style/line_map_detail" />
+
+    <TextView
+        android:id="@+id/tv_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/content"
+        android:textColor="#808080"
+        android:textSize="12sp" 
+        android:layout_margin="16dip"
+        android:layout_gravity="left|top" />
+
+    <View style="@style/line_map_detail" />
+    
+</LinearLayout>

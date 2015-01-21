@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/ly_title_righttext" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="49.33dp"
+            android:layout_height="66.67dp"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="15dp"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:id="@+id/tv_bookname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/iv_icon"
+            android:text="name"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/tv_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_bookname"
+            android:layout_below="@+id/tv_bookname"
+            android:text="author" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_bookname"
+            android:layout_below="@+id/tv_author"
+            android:text="date" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dip"
+        android:layout_marginRight="15dip"
+        android:layout_marginTop="15dip"
+        android:weightSum="2" >
+
+        <TextView
+            android:id="@+id/book_sel1"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dip"
+            android:layout_weight="1"
+            android:background="#799692"
+            android:gravity="center"
+            android:padding="10dip"
+            android:text="@string/free_read" />
+
+        <TextView
+            android:id="@+id/book_sel2"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dip"
+            android:layout_weight="1"
+            android:background="#f5f5f5"
+            android:gravity="center"
+            android:padding="10dip"
+            android:text="@string/save_shelf" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_booksummary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dip"
+        android:text="summary" />
+
+    <View style="@style/line_book_share1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dip"
+        android:background="#f5f5f5"
+        android:weightSum="2" >
+
+        <RelativeLayout
+            android:id="@+id/book_opreation1"
+            style="@style/ly_map_search_menu" >
+
+            <TextView
+                android:id="@+id/tv_bookchapter"
+                style="@style/tv_book_share_menu"
+                android:drawableLeft="@drawable/book_bookmark"
+                android:text="共0章" />
+        </RelativeLayout>
+
+        <View style="@style/line_book_share2" />
+
+        <RelativeLayout
+            android:id="@+id/book_opreation2"
+            style="@style/ly_map_search_menu" >
+
+            <TextView
+                style="@style/tv_book_share_menu"
+                android:drawableLeft="@drawable/share_book"
+                android:text="@string/share" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View style="@style/line_book_share1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dip"
+        android:drawableLeft="@drawable/shape_curser"
+        android:drawablePadding="15dip"
+        android:text="@string/book_mark"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <GridView
+        android:id="@+id/gv_bookmark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="3" >
+    </GridView>
+    
+</LinearLayout>

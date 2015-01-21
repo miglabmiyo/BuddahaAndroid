@@ -65,4 +65,77 @@
         <item name="android:background">#d3d5dc</item>
     </style>
 
+    <style name="line_map1">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dip</item>
+        <item name="android:background">#dbdbdb</item>
+    </style>
+    <style name="line_map2">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dip</item>
+        <item name="android:background">#ffffffff</item>
+    </style>
+    <style name="line_map_detail">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.5dip</item>
+        <item name="android:background">#e3e3e3</item>
+    </style>
+    
+    <style name="ly_map_search_menu">
+        <item name="android:layout_width">0dip</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+    
+    <style name="tv_map_search_menu">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:textColor">#111</item>
+        <item name="android:gravity">center</item>
+        <item name="android:drawableRight">@drawable/allow_choose</item>
+        <item name="android:drawablePadding">5dip</item>
+    </style>
+    
+        <style name="tv_map_methods">
+        <item name="android:layout_width">0dip</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">#6c6c6c</item>
+        <item name="android:gravity">center</item>
+        <item name="android:drawablePadding">5dip</item>
+        <item name="android:paddingTop">5dip</item>
+    </style>
+    
+    <style name="tv_book_share_menu">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:textColor">#3c3c3c</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">10dip</item>
+        <item name="android:drawablePadding">8dip</item>
+    </style>
+
+    <style name="line_book_share1">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dip</item>
+        <item name="android:background">#ebebeb</item>
+    </style>
+
+    <style name="line_book_share2">
+        <item name="android:layout_width">1dip</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">#ebebeb</item>
+    </style>
+    
+    <style name="activeName_20px_shadow">
+		<item name="android:textSize">13.33sp</item>
+		<item name="android:textColor">#ffffffff</item>
+		<item name="android:shadowColor">#ff000000</item>
+		<item name="android:shadowDx">1.0</item>
+		<item name="android:shadowDy">2.0</item>
+		<item name="android:shadowRadius">1.0</item>
+	</style>
 </resources>

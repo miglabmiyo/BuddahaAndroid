@@ -2,12 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="45dip" 
-    android:background="#528B8B" >
+    android:background="#53645e" >
 
     <TextView
         android:id="@+id/tv_findfo"
         style="@style/tv_home_title"
-        android:background="#545454"
+        android:background="#3a4e47"
         android:text="@string/found_buddha" />
 
     <TextView

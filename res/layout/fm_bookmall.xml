@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:background="#ffffffff"
+        android:orientation="vertical" >
+
+        <include
+            android:id="@+id/ly_books_menus"
+            layout="@layout/ly_books_fourmenus" />
+
+        <include
+            android:id="@+id/ly_books_recommend"
+            layout="@layout/ly_books_twobooks" />
+
+        <include
+            android:id="@+id/ly_books_jing"
+            layout="@layout/ly_books_threebooks" />
+
+        <include
+            android:id="@+id/ly_books_yigui"
+            layout="@layout/ly_books_threebooks" />
+
+        <include
+            android:id="@+id/ly_books_lun"
+            layout="@layout/ly_books_threebooks" />
+    </LinearLayout>
+
+</ScrollView>

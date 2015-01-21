@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:background="#ffffffff"
+        android:orientation="vertical" >
+
+        <include
+            android:id="@+id/ly_introduce_menus"
+            layout="@layout/ly_introduce_threemenus" />
+
+        <include
+            android:id="@+id/ly_introduce_history"
+            layout="@layout/ly_active_others" />
+
+        <include
+            android:id="@+id/ly_introduce_thought"
+            layout="@layout/ly_active_others" />
+
+        <include
+            android:id="@+id/ly_introduce_browse"
+            layout="@layout/ly_active_others" />
+    </LinearLayout>
+
+</ScrollView>

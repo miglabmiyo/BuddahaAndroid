@@ -5,7 +5,6 @@ import home.fragment.TextFragment;
 import user.login.MyUser;
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.DisplayMetrics;
@@ -27,23 +26,14 @@ public class Home extends BaseFragmentActivity {
 	View content;
 	FragmentManager fragmentManager;
 	FragmentTransaction fragmentTransaction;
-	int screenW;// 当前屏幕宽度
 
+	/** 初始化 */
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		init();
-	}
-
-	void init() {
-		setView();		
+	protected void init() {
+		setView();
 	}
 
 	void setView() {
-		DisplayMetrics dm = new DisplayMetrics();
-		getWindowManager().getDefaultDisplay().getMetrics(dm);
-		screenW = dm.widthPixels;
-
 		this.setContentView(R.layout.ac_home);
 		new HomeTitle(this);
 		content = this.findViewById(R.id.home_content);
@@ -53,13 +43,13 @@ public class Home extends BaseFragmentActivity {
 		MyLog.i(TAG, "changeContent selection: " + selection);
 		switch (selection) {
 		case 1:
-			openFragment(new FoundBuddhaFragment(screenW));
+			openFragment(new FoundBuddhaFragment());
 			break;
 		case 2:
-			if(MyUser.getInstance().isLogin()){
+			if (MyUser.getInstance().isLogin()) {
 				openFragment(new TextFragment("我的佛缘", 0xFF8E8E8E));
-			}else{
-				this.startActivity(new Intent(this, Login.class));
+			} else {
+				startActivity(new Intent(this, Login.class));
 			}
 			break;
 		case 3:
@@ -91,7 +81,7 @@ public class Home extends BaseFragmentActivity {
 		TextView tv_findfo, tv_myfo, tv_myinfo;
 		ImageView iv_msg, iv_search;
 		Activity ac;
-		int selColor = 0xff545454, transparent = 0x00000000;
+		int selColor = 0xff3a4e47, transparent = 0x00000000;
 
 		public HomeTitle(Activity ac) {
 			this.ac = ac;
@@ -180,7 +170,7 @@ public class Home extends BaseFragmentActivity {
 			ShowUtil.showToast(this, R.string.exit_tips);
 			exitTime = System.currentTimeMillis();
 		} else if ((System.currentTimeMillis() - exitTime) > 0) {
-//			ToolUtil.closeKeyBoard(this);
+			// ToolUtil.closeKeyBoard(this);
 			AppStatus.exitApp(this);
 		}
 	}

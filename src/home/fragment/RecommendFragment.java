@@ -3,8 +3,6 @@ package home.fragment;
 import home.task.RecommendBuddhaTask;
 import home.view.SecondViewPager;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,12 +10,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.PagerAdapter;
@@ -43,20 +38,15 @@ import com.miglab.buddha.R;
  * @version 创建时间：2014-11-29 下午10:06:15 类说明 推荐
  */
 public class RecommendFragment extends BaseFragment {
-	View vRoot;
-	Activity ac;
-	RecommendView[] views = new RecommendView[4];
+	BaseView[] views = new BaseView[4];
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		vRoot = inflater.inflate(R.layout.fm_recommend, container, false);
-		ac = this.getActivity();
-		init();
-		return vRoot;
+	protected void setLayout() {
+		rootResource = R.layout.fm_recommend;
 	}
 
-	void init() {
+	@Override
+	protected void initView() {
 		new RecommendBuddhaTask(h).execute();
 
 		views[0] = new RecommendBanner();
@@ -64,14 +54,32 @@ public class RecommendFragment extends BaseFragment {
 		views[2] = new RecommendBooks();
 		views[3] = new RecommendActivitys();
 	}
+	
+	@Override
+	protected void doHandler(Message msg) {
+		try {
+			int nCommand = msg.what;
+			switch (nCommand) {
+			case ApiDefine.GET_SUCCESS:
+				MyLog.d(TAG, "GET_SUCCESS");
+				if (msg.obj != null) {
+					Object[] objs = (Object[]) msg.obj;
+					if (objs != null && objs.length >= views.length)
+						for (int i = 0; i < views.length; i++) {
+							views[i].onDataUpdated(objs[i]);
+						}
+				}
 
-	class RecommendView {
-		void onDataUpdated() {
-			MyLog.v(TAG, "onDataUpdated");
+				break;
+			default:
+				break;
+			}
+		} catch (Exception e) {
+			MyLog.showException(e);
 		}
 	}
 
-	class RecommendBanner extends RecommendView {
+	class RecommendBanner extends BaseView {
 		SecondViewPager vp;
 		AdViewPagerAdapter vpAdapter;
 		ArrayList<AdvertBannerInfo> mlist = new ArrayList<AdvertBannerInfo>();
@@ -352,26 +360,7 @@ public class RecommendFragment extends BaseFragment {
 						boolean isSetImage = false;
 						String pic = bannerList.get(position).imgUrl;
 						if (pic != null && pic.length() > 0) {
-							String imageName = ToolUtil.md5(pic);
-							if (imageName != null && imageName.length() > 0
-									&& new File(path + imageName).exists()) {
-								try {
-
-									bitmap = getBitmap(path + imageName);
-									if (bitmap != null) {
-										img.setImageBitmap(bitmap);
-										isSetImage = true;
-									}
-								} catch (OutOfMemoryError e) {
-									// TODO: handle exception
-									// ShowUtil.showErrorOOMToast(mContext,
-									// R.string.tost_oomerror);
-									if (bitmap != null) {
-										bitmap.recycle();
-										bitmap = null;
-									}
-								}
-							}
+							isSetImage = ImageUtil.setIcon(img, ToolUtil.md5(pic), path, bitmap);
 						}
 
 						if (!isSetImage)
@@ -401,40 +390,6 @@ public class RecommendFragment extends BaseFragment {
 							R.id.image);
 					setImage(img, i);
 				}
-			}
-
-			private Bitmap getBitmap(String path) {
-				if (TextUtils.isEmpty(path)) {
-					return null;
-				}
-				File f = new File(path);
-				if (!f.exists()) {
-					return null;
-				}
-				Bitmap b = null;
-				try {
-					BitmapFactory.Options opts = new BitmapFactory.Options();
-					opts.inJustDecodeBounds = true;
-					BitmapFactory.decodeStream(new FileInputStream(path), null,
-							opts);
-					opts.inSampleSize = 3;
-
-					// System.out.println("图片取样值："+opts.inSampleSize);
-					opts.inJustDecodeBounds = false;
-					b = BitmapFactory.decodeStream(new FileInputStream(path),
-							null, opts);
-					//
-				} catch (Exception e) {
-					// TODO: handle exception
-					e.printStackTrace();
-				} catch (OutOfMemoryError error) {
-					if (b != null) {
-						b.recycle();
-					}
-					error.printStackTrace();
-
-				}
-				return b;
 			}
 
 		}
@@ -503,8 +458,8 @@ public class RecommendFragment extends BaseFragment {
 		}
 
 		@Override
-		void onDataUpdated() {
-			super.onDataUpdated();
+		protected void onDataUpdated(Object obj) {
+			super.onDataUpdated(obj);
 			freshViewPager();
 		}
 
@@ -514,7 +469,7 @@ public class RecommendFragment extends BaseFragment {
 		void click(ImageView img, int position);
 	}
 
-	class RecommendNews extends RecommendView {
+	class RecommendNews extends BaseView {
 		View ly_news;
 
 		public RecommendNews() {
@@ -570,13 +525,13 @@ public class RecommendFragment extends BaseFragment {
 		}
 
 		@Override
-		void onDataUpdated() {
-			super.onDataUpdated();
+		protected void onDataUpdated(Object obj) {
+			super.onDataUpdated(obj);
 			initData();
 		}
 	}
 
-	class RecommendBooks extends RecommendView {
+	class RecommendBooks extends BaseView {
 		ImageView[] iv_books = new ImageView[3];
 
 		public RecommendBooks() {
@@ -613,43 +568,17 @@ public class RecommendFragment extends BaseFragment {
 		}
 
 		@Override
-		void onDataUpdated() {
-			super.onDataUpdated();
+		protected void onDataUpdated(Object obj) {
+			super.onDataUpdated(obj);
 			initData();
 		}
 	}
 
-	class RecommendActivitys extends RecommendView {
+	class RecommendActivitys extends BaseView {
 
 		@Override
-		void onDataUpdated() {
-			// TODO 自动生成的方法存根
-			super.onDataUpdated();
+		protected void onDataUpdated(Object obj) {
+			super.onDataUpdated(obj);
 		}
 	}
-
-	Handler h = new Handler() {
-
-		@Override
-		public void handleMessage(Message msg) {
-			// TODO 自动生成的方法存根
-			super.handleMessage(msg);
-
-			try {
-				int nCommand = msg.what;
-				switch (nCommand) {
-				case ApiDefine.GET_SUCCESS:
-					MyLog.d(TAG, "GET_SUCCESS");
-					for (int i = 0; i < views.length; i++) {
-						views[i].onDataUpdated();
-					}
-					break;
-				default:
-					break;
-				}
-			} catch (Exception e) {
-				MyLog.showException(e);
-			}
-		}
-	};
 }

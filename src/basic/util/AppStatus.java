@@ -9,6 +9,8 @@ import android.app.Application;
 import android.app.NotificationManager;
 import android.content.Context;
 
+import com.baidu.mapapi.SDKInitializer;
+
 
 /**
  * @author song
@@ -33,6 +35,8 @@ public class AppStatus extends Application {
 		// 设定内存利用率的百分比
 //		VMRuntime.getRuntime().setTargetHeapUtilization(0.75f);
 
+		// 在使用 百度地图SDK 各组间之前初始化 context 信息，传入 ApplicationContext
+		SDKInitializer.initialize(this);
 	}
 
 	public synchronized static void register(Activity activity) {

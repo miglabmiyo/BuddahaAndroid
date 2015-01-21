@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:orientation="vertical" >
+
+    <GridView
+        android:id="@+id/gv_actives"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="@color/transparent"
+        android:listSelector="@color/transparent"
+        android:layout_marginTop="14.67dip"
+        android:layout_marginRight="14.67dip"
+       	android:layout_marginLeft="14.67dip"
+        android:gravity="center"
+        android:numColumns="2"
+        android:horizontalSpacing="10dip" 
+        android:verticalSpacing="10dip"
+        android:stretchMode="columnWidth" >
+        
+    </GridView>
+    
+</LinearLayout>

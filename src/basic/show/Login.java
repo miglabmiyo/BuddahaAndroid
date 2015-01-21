@@ -2,8 +2,6 @@ package basic.show;
 
 import user.login.MyLogin;
 import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,12 +20,7 @@ public class Login extends BaseActivity {
 	View[] items = new View[4];
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		init();
-	}
-
-	void init() {
+	protected void init() {
 		this.setContentView(R.layout.ac_login);
 		setView();
 
@@ -55,16 +48,14 @@ public class Login extends BaseActivity {
 	}
 
 	void chooseSelect(View v) {
-		if (myLogin != null && System.currentTimeMillis() - clickTime > 500) {
-			clickTime = System.currentTimeMillis();
-
+		if (myLogin != null && canClicked()) {
 			if (v == items[0]) {
 				myLogin.qqLogin();
 			} else if (v == items[1]) {
 				myLogin.weiboLogin();
 			} else if (v == items[2]) {
 
-			} else if (v == items[3]) { //快速登录
+			} else if (v == items[3]) { // 快速登录
 				myLogin.guestLogin();
 			}
 		}
@@ -78,27 +69,15 @@ public class Login extends BaseActivity {
 			myLogin.onActivityResult(requestCode, resultCode, data);
 	}
 
-	/** UI线程 */
-	Handler h = new Handler() {
-		public void handleMessage(Message msg) {
-			super.handleMessage(msg);
-			if (msg != null) {
-				if (msg.what == ApiDefine.LOGIN_SUCCESS) {
-					MyLog.d(TAG, "登录成功");
-					ShowUtil.showToast(Login.this, R.string.login_success);
-					next();
-				}else{
-					MyLog.d(TAG, "登录失败");
-					ShowUtil.showToast(Login.this, R.string.login_fail);
-				}
-			}
+	@Override
+	protected void doHandler(Message msg) {
+		if (msg.what == ApiDefine.GET_SUCCESS) {
+			MyLog.d(TAG, "登录成功");
+			ShowUtil.showToast(this, R.string.login_success);
+			next(Home.class);
+		} else {
+			MyLog.d(TAG, "登录失败");
+			ShowUtil.showToast(this, R.string.login_fail);
 		}
-
-	};
-
-	
-	protected void next() {
-		startActivity(new Intent(this, Home.class));
-		finish();
 	}
 }

@@ -87,7 +87,7 @@ public class ApiRequest {
 		String result = null;
 		int statusCode = 0;
 		HttpGet getMethod = new HttpGet(url);
-		// MyLog.w("getRequest url: " + url);
+		MyLog.d("getRequest url: " + url);
 
 		try {
 			client.getParams().setParameter(
@@ -120,6 +120,53 @@ public class ApiRequest {
 		try {
 			InputStreamReader inputStreamReader = new InputStreamReader(
 					httpEntity.getContent(), HTTP.UTF_8);
+			char buffer[] = new char[length];
+			int count;
+			while ((count = inputStreamReader.read(buffer, 0, length)) > 0) {
+				stringBuffer.append(buffer, 0, count);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return stringBuffer.toString();
+	}
+
+	public static String getText(String url) throws Exception {
+		String result = null;
+		HttpGet getMethod = new HttpGet(url);
+		DefaultHttpClient client = null;
+		MyLog.d("getText url: " + url);
+		try {
+			client = new DefaultHttpClient(new BasicHttpParams());
+			client.getParams().setParameter(
+					CoreConnectionPNames.CONNECTION_TIMEOUT, 10000);
+			client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT,
+					10000);
+
+			HttpResponse httpResponse = client.execute(getMethod);
+			// statusCode = httpResponse.getStatusLine().getStatusCode();
+			result = readStream(httpResponse.getEntity());
+		} catch (SocketTimeoutException se) {
+			throw se;
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			getMethod.abort();
+			if (client != null)
+				client.getConnectionManager().shutdown();
+		}
+		return result;
+	}
+
+	protected static String readStream(HttpEntity httpEntity) {
+		int length = (int) httpEntity.getContentLength();
+
+		if (length <= 0)
+			length = 10000;
+		StringBuffer stringBuffer = new StringBuffer(length);
+		try {
+			InputStreamReader inputStreamReader = new InputStreamReader(
+					httpEntity.getContent(), "gbk");
 			char buffer[] = new char[length];
 			int count;
 			while ((count = inputStreamReader.read(buffer, 0, length)) > 0) {

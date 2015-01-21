@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/ly_title_single" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dip"
+        android:weightSum="3" >
+
+        <RelativeLayout
+            android:id="@+id/ly_sel1"
+            style="@style/ly_map_search_menu" >
+            <TextView
+                style="@style/tv_map_search_menu"
+                android:text="@string/sel_1" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="1dip"
+            android:layout_height="15dip"
+            android:layout_margin="10dip"
+            android:src="@drawable/disc_line" />
+
+        <RelativeLayout
+            android:id="@+id/ly_sel2"
+            style="@style/ly_map_search_menu" >
+            <TextView
+                style="@style/tv_map_search_menu"
+                android:text="@string/sel_2" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="1dip"
+            android:layout_height="15dip"
+            android:layout_margin="10dip"
+            android:src="@drawable/disc_line" />
+
+        <RelativeLayout
+            android:id="@+id/ly_sel3"
+            style="@style/ly_map_search_menu" >
+            <TextView
+                style="@style/tv_map_search_menu"
+                android:text="@string/sel_3" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <ListView
+            android:id="@+id/lv_result"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="#e3e3e3"
+            android:dividerHeight="1dip" >
+        </ListView>
+
+        <include
+            android:id="@+id/sel_menu"
+            layout="@layout/ly_map_search_menu"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+</LinearLayout>

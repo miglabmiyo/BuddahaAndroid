@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/ly_arround"
+        android:layout_width="match_parent"
+        android:layout_height="58dip"
+        android:layout_alignParentBottom="true"
+        android:background="#5fffffff" >
+
+        <View
+            android:id="@+id/line1"
+            style="@style/line_map1" />
+
+        <View
+            style="@style/line_map2"
+            android:layout_below="@+id/line1" />
+
+        <TextView
+            android:id="@+id/tv_arround"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:drawableLeft="@drawable/around_ico"
+            android:drawablePadding="10dip"
+            android:gravity="center"
+            android:text="@string/arround" />
+    </RelativeLayout>
+
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/bmapView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/ly_arround"
+        android:clickable="true" />
+
+    <RelativeLayout
+        android:id="@+id/ly_build_info"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:layout_above="@id/ly_arround"
+        android:layout_margin="15dip"
+        android:background="@drawable/shape_round_bg" >
+
+        <ImageView
+            android:id="@+id/iv_build_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/around_food" />
+        
+        <TextView
+            android:id="@+id/tv_build_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/iv_build_icon"
+            android:gravity="left"
+            android:text="@string/arround" />
+        
+        <TextView
+            android:id="@+id/tv_build_address"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_build_name"
+            android:layout_alignLeft="@id/tv_build_name"
+            android:gravity="left"
+            android:text="@string/arround" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

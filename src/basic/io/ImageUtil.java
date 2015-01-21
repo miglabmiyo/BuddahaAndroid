@@ -44,6 +44,7 @@ import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.ImageSpan;
 import android.view.View;
+import android.widget.ImageView;
 import basic.task.ImagesDownloadTask;
 import basic.util.MyLog;
 import basic.util.ToolUtil;
@@ -132,7 +133,6 @@ public class ImageUtil {
 		}
 		return return_path;
 	}
-
 
 	/**
 	 * 初始化图片缓存的磁盘路径(文件夹路径)
@@ -348,10 +348,10 @@ public class ImageUtil {
 
 			FileOutputStream out;
 			try {
-//				if (!file.exists()){
-//					file.createNewFile();
-//				}
-				
+				// if (!file.exists()){
+				// file.createNewFile();
+				// }
+
 				out = new FileOutputStream(file);
 				ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 				if (bitmap.compress(Bitmap.CompressFormat.PNG, 100,
@@ -395,7 +395,7 @@ public class ImageUtil {
 			BitmapFactory.decodeStream(new FileInputStream(path), null, opts);
 			opts.inSampleSize = ImageUtil
 					.computeSampleSize(opts, -1, 320 * 320);
-			 System.out.println("图片取样值："+opts.inSampleSize);
+			System.out.println("图片取样值：" + opts.inSampleSize);
 			opts.inJustDecodeBounds = false;
 			b = BitmapFactory.decodeStream(new FileInputStream(path), null,
 					opts);
@@ -412,10 +412,10 @@ public class ImageUtil {
 		}
 		return b;
 	}
-	
+
 	/**
-	 * 获取图片 以ALPHA8的方式
-	 * by xpp
+	 * 获取图片 以ALPHA8的方式 by xpp
+	 * 
 	 * @param path
 	 *            图片的保存路径
 	 * @return
@@ -437,7 +437,7 @@ public class ImageUtil {
 			BitmapFactory.decodeStream(new FileInputStream(path), null, opts);
 			opts.inSampleSize = ImageUtil
 					.computeSampleSize(opts, -1, 100 * 100);
-			System.out.println("图片取样值："+opts.inSampleSize);
+			System.out.println("图片取样值：" + opts.inSampleSize);
 			opts.inJustDecodeBounds = false;
 			b = BitmapFactory.decodeStream(new FileInputStream(path), null,
 					opts);
@@ -454,31 +454,33 @@ public class ImageUtil {
 		}
 		return b;
 	}
-	
-	
-	/**根据图片资源获取bitmap
+
+	/**
+	 * 根据图片资源获取bitmap
+	 * 
 	 * @param context
 	 * @param resId
-	 * @param isHigh 是否需要原图的像素
+	 * @param isHigh
+	 *            是否需要原图的像素
 	 * @return
 	 */
-	public static Bitmap readBitMap(Context context, int resId, boolean isHigh){  
+	public static Bitmap readBitMap(Context context, int resId, boolean isHigh) {
 		Bitmap b = null;
 		try {
-			 BitmapFactory.Options opt = new BitmapFactory.Options();  
-			 if (isHigh) {
-//				 opt.inPreferredConfig = Bitmap.Config.ARGB_4444; 
-				 opt.inJustDecodeBounds = false;
-				 opt.inSampleSize = 1;
-			 } else {
-				 opt.inPreferredConfig = Bitmap.Config.ALPHA_8; 
-				 opt.inJustDecodeBounds = false;
-				 opt.inSampleSize = 2;
-			 }
-			 
-			 // 获取资源图片  
-			 InputStream is = context.getResources().openRawResource(resId); 
-			 b = BitmapFactory.decodeStream(is,null,opt);  
+			BitmapFactory.Options opt = new BitmapFactory.Options();
+			if (isHigh) {
+				// opt.inPreferredConfig = Bitmap.Config.ARGB_4444;
+				opt.inJustDecodeBounds = false;
+				opt.inSampleSize = 1;
+			} else {
+				opt.inPreferredConfig = Bitmap.Config.ALPHA_8;
+				opt.inJustDecodeBounds = false;
+				opt.inSampleSize = 2;
+			}
+
+			// 获取资源图片
+			InputStream is = context.getResources().openRawResource(resId);
+			b = BitmapFactory.decodeStream(is, null, opt);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -489,7 +491,7 @@ public class ImageUtil {
 			error.printStackTrace();
 
 		}
-		return b;  
+		return b;
 	}
 
 	/**
@@ -766,18 +768,18 @@ public class ImageUtil {
 
 		return false;
 	}
-	
-	public static int sampleSize(int width, int target){	    	
-    	int result = 1;	    	
-    	for(int i = 0; i < 10; i++){	    		
-    		if(width < target * 2){
-    			break;
-    		}	    		
-    		width = width / 2;
-    		result = result * 2;	    		
-    	}	    	
-    	return result;
-    }
+
+	public static int sampleSize(int width, int target) {
+		int result = 1;
+		for (int i = 0; i < 10; i++) {
+			if (width < target * 2) {
+				break;
+			}
+			width = width / 2;
+			result = result * 2;
+		}
+		return result;
+	}
 
 	public static int computeSampleSize(BitmapFactory.Options options,
 			int minSideLength, int maxNumOfPixels) {
@@ -815,7 +817,6 @@ public class ImageUtil {
 			return upperBound;
 		}
 	}
-
 
 	/**
 	 * 截取图片的中间部分
@@ -1144,13 +1145,12 @@ public class ImageUtil {
 			opts.inJustDecodeBounds = true;
 			BitmapFactory.decodeByteArray(b, 0, b.length, opts);
 
-			opts.inSampleSize = ImageUtil.computeSampleSize(opts, -1,
-					100 * 100);
+			opts.inSampleSize = ImageUtil
+					.computeSampleSize(opts, -1, 100 * 100);
 			opts.inJustDecodeBounds = false;
 
-			return BitmapFactory.decodeByteArray(b, 0, b.length,
-					opts);
-//			return BitmapFactory.decodeByteArray(b, 0, b.length);
+			return BitmapFactory.decodeByteArray(b, 0, b.length, opts);
+			// return BitmapFactory.decodeByteArray(b, 0, b.length);
 		} else {
 			return null;
 		}
@@ -1208,5 +1208,55 @@ public class ImageUtil {
 		} else {
 			return null;
 		}
+	}
+
+	public static boolean setIcon(ImageView iv, String url, Context con,
+			String dirType) {
+		Bitmap bitmap = null;
+		String path = ImageUtil.initImagePath(con, dirType);
+		String imageName = ToolUtil.md5(url);
+		return setIcon(iv, imageName, path, bitmap);
+	}
+
+	public static boolean setIcon(ImageView iv, String imageName, String path,
+			Bitmap bitmap) {
+		if (imageName != null && imageName.length() > 0
+				&& new File(path + imageName).exists()) {
+			try {
+				bitmap = getBitmap(path + imageName);
+				if (bitmap != null) {
+					iv.setImageBitmap(bitmap);
+					return true;
+				}
+			} catch (OutOfMemoryError e) {
+				if (bitmap != null) {
+					bitmap.recycle();
+					bitmap = null;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public static boolean setActiveIcon(ImageView iv, String imageName, String path,
+			Bitmap bitmap, int bitmapWidth, int bitmapHeight) {
+		if (imageName != null && imageName.length() > 0
+				&& new File(path + imageName).exists()) {
+			try {
+				bitmap = getBitmap(path + imageName);
+				if (bitmap != null) {
+					bitmap = Bitmap.createScaledBitmap(bitmap, 
+							bitmapWidth, bitmapHeight, true);
+					iv.setImageBitmap(bitmap);
+					return true;
+				}
+			} catch (OutOfMemoryError e) {
+				if (bitmap != null) {
+					bitmap.recycle();
+					bitmap = null;
+				}
+			}
+		}
+		return false;
 	}
 }

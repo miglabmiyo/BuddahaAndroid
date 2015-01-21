@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <include 
+        android:id="@+id/title"
+        layout="@layout/ly_title_single" />
+        
+    <RelativeLayout 
+        android:id="@+id/ry_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+    		android:id="@+id/iv_introduce"
+    		android:layout_width="49.33dp"
+            android:layout_height="66.67dp"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="15dp"
+    		android:src="@drawable/ic_launcher" />
+
+   			<TextView
+          		android:id="@+id/tv_name"
+          		android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+          		android:layout_marginTop="15dp"
+            	android:layout_toRightOf="@+id/iv_introduce"
+            	android:text="name"
+          		android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+      		<TextView
+          		android:id="@+id/tv_chapter"
+          		android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:layout_alignLeft="@+id/tv_name"
+            	android:layout_below="@+id/tv_name"
+          		android:text="@string/chapter"
+          		android:textColor="#777777"
+          		android:textSize="16sp" />
+      
+      		<TextView
+          		android:id="@+id/tv_author"
+          		android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:layout_alignLeft="@+id/tv_name"
+            	android:layout_below="@+id/tv_chapter"
+            	android:text="" />
+        
+    </RelativeLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dip"
+        android:layout_marginRight="15dip"
+        android:layout_marginTop="15dip"
+        android:weightSum="2" >
+
+        <TextView
+            android:id="@+id/book_sel1"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dip"
+            android:layout_weight="1"
+            android:background="#f5f5f5"
+            android:gravity="center"
+            android:padding="10dip"
+            android:text="@string/read" />
+        
+        <RelativeLayout
+            android:id="@+id/book_opreation2"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:background="#799692"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/book_sel2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="#ffffff"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:padding="10dip"
+                android:drawablePadding="8dip"
+                android:drawableLeft="@drawable/share_white"
+                android:text="@string/share" />
+        </RelativeLayout>
+        
+    </LinearLayout>
+    
+    <TextView
+        android:id="@+id/tv_booksummary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dip"
+        android:text="summary" />
+    
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp" >
+        
+        <TextView
+    		android:id="@+id/tv_detail_intro"
+    		style="@style/tv_recommend_title"
+    		android:text="@string/detail_intro" />
+        
+        <ListView
+            android:id="@+id/lv_intro_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tv_detail_intro"
+            android:cacheColorHint="@color/transparent"
+            android:divider="@null"
+            android:headerDividersEnabled="false" />
+        
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dip"  >    
+
+    <TextView
+        android:id="@+id/item_name12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/phone_ico"
+        android:drawablePadding="16dip"
+        android:textColor="#ff010101"
+        android:text="@string/name" />
+    
+</LinearLayout>

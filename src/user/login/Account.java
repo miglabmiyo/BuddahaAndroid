@@ -1,5 +1,6 @@
 package user.login;
 
+
 /**
  * @author song
  * @version 创建时间：2014-11-27 下午8:27:01 类说明
@@ -23,6 +24,5 @@ public class Account {
 				+ ", headUrl=" + headUrl + ", birthday=" + birthday
 				+ ", location=" + location + ", imei=" + imei + "]";
 	}
-
-
+	
 }

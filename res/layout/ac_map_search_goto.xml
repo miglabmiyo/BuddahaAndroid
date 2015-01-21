@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/ly_methods"
+        android:layout_width="match_parent"
+        android:layout_height="58dip"
+        android:layout_alignParentBottom="true"
+        android:background="#5fffffff"
+        android:weightSum="3" >
+
+        <TextView
+            android:id="@+id/tv_sel1"
+            style="@style/tv_map_methods"
+            android:drawableTop="@drawable/map_method_bus"
+            android:text="@string/sel_bus" />
+
+        <TextView
+            android:id="@+id/tv_sel2"
+            style="@style/tv_map_methods"
+            android:drawableTop="@drawable/map_method_car"
+            android:text="@string/sel_drive" />
+
+        <TextView
+            android:id="@+id/tv_sel3"
+            style="@style/tv_map_methods"
+            android:drawableTop="@drawable/map_method_walk"
+            android:text="@string/sel_walk" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/ly_methods" >
+
+        <com.baidu.mapapi.map.MapView
+            android:id="@+id/bmapView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:clickable="true" />
+        
+    </RelativeLayout>
+
+</RelativeLayout>

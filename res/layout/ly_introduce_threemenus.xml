@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dip"
+    android:paddingTop="10dip"
+    android:weightSum="3" >
+
+    <ImageView
+        android:id="@+id/introduce_menu1"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/history" />
+
+    <ImageView
+        android:id="@+id/introduce_menu2"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/thought" />
+
+    <ImageView
+        android:id="@+id/introduce_menu3"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/art" />
+
+</LinearLayout>
